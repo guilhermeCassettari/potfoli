@@ -1,16 +1,13 @@
 import 'reflect-metadata';
-import dotenv from 'dotenv';
 import cors from 'cors';
 import { errors } from 'celebrate';
 
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
-import path from 'path';
+import { GetEnv } from './shared/getEnv/GetEnv';
 import AppError from './shared/errors/AppError';
 
-dotenv.config({ path: path.resolve(__dirname, '..', '..', '.env') });
-const port = process.env.BACKEND_PORT;
-
+const getEnv = new GetEnv();
 const app = express();
 
 app.use(cors());
@@ -39,11 +36,9 @@ app.use(
   },
 );
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.listen(port, () => {
+app.listen(getEnv.backendPort, () => {
   /* eslint-disable no-console */
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(
+    `Example app listening at http://localhost:${getEnv.backendPort} 🔥`,
+  );
 });
