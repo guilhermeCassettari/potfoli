@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/index.ts ",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "start": "ts-node src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "dependencies": {
     "celebrate": "^15.0.3",
