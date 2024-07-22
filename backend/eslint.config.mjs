@@ -34,8 +34,9 @@ export default [...compat.extends(
     },
 
     rules: {
-        "no-console": "warn",
-        "no-unused-vars": "warn",
-        "prettier/prettier": "error",
+      "no-console": "warn",
+      "no-unused-vars": "warn",
+      "prettier/prettier": "error",
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
     },
 }];
