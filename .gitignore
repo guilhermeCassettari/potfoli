@@ -42,6 +42,7 @@ build/
 backend/node_modules/
 backend/dist/
 backend/.env
+yarn.lock
 
 # Exemplo específico do frontend (Next.js)
 frontend/.next/
