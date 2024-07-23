@@ -1,7 +1,7 @@
 import { IUsersRepository } from './IUsersRepository';
-import { User } from '../../../entity/User';
+import { User } from '../../entity/User';
 import { Repository } from 'typeorm';
-import { AppDataSource } from '../../../data-source';
+import { AppDataSource } from '../../../shared/data-source';
 import { IUser } from '../entities/IUser';
 
 class UsersRepository implements IUsersRepository {

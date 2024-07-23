@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { User } from './entity/User';
-import { GetEnv } from './shared/getEnv/GetEnv';
+import { User } from '../modules/entity/User';
+import { GetEnv } from './getEnv/GetEnv';
 
 const getEnv = new GetEnv();
 
