@@ -18,3 +18,8 @@ export const AppDataSource = new DataSource({
   migrations: [],
   subscribers: [],
 });
+
+AppDataSource.initialize().catch(err => {
+  //  eslint-disable-next-line no-console
+  console.error('Error during Data Source initialization', err);
+});

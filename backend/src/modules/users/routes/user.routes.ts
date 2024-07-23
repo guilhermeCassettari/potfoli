@@ -4,7 +4,7 @@ import UsersController from '../controllers/UsersController';
 const usersRouter = Router();
 
 const usersController = new UsersController();
-usersRouter.get('/', usersController.show);
+usersRouter.get('/', usersController.create);
 
 usersRouter.post('/', (request, response) => {
   return response.json({ message: 'Create!' });

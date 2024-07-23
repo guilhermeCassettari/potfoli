@@ -1,11 +1,16 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+import CreateUserService from '../services/CreateUserService';
 
 export default class UsersController {
   public async create(
     request: Request,
     response: Response,
   ): Promise<Response> {
-    return response.json({ message: 'Rola' });
+    const users = container.resolve(CreateUserService);
+    const createUser = await users.execute();
+
+    return response.json(createUser);
   }
 
   public async update() {}
@@ -16,6 +21,8 @@ export default class UsersController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    return response.json({ message: 'get Users' });
+    const users = container.resolve(CreateUserService);
+    const createUser = await users.execute();
+    return response.json(createUser);
   }
 }

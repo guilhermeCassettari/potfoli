@@ -6,13 +6,15 @@ import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import { GetEnv } from './shared/getEnv/GetEnv';
 import AppError from './shared/errors/AppError';
+import './shared/container';
+import routes from './routes';
 
 const getEnv = new GetEnv();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use(routes);
 app.use(errors());
 
 app.use(
@@ -31,7 +33,7 @@ app.use(
     }
     return response.status(500).json({
       status: 'error',
-      message: 'Internal server error',
+      message: `Internal server error- ${error.message}`,
     });
   },
 );
