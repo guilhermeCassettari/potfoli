@@ -1,9 +1,18 @@
 import 'reflect-metadata';
+import path from 'path';
 import { DataSource } from 'typeorm';
-import { User } from '../modules/entity/User';
+import { User } from '../modules/users/entities/User.entity';
 import { GetEnv } from './getEnv/GetEnv';
+import AppError from './errors/AppError';
 
 const getEnv = new GetEnv();
+const migrationPath = path.join(
+  __dirname,
+  '..',
+  '..',
+  'migrations',
+  '*.ts',
+);
 
 export const AppDataSource = new DataSource({
   type: getEnv.dbType,
@@ -15,11 +24,14 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: false,
   entities: [User],
-  migrations: [],
+  migrations: [migrationPath],
+
   subscribers: [],
 });
 
 AppDataSource.initialize().catch(err => {
-  //  eslint-disable-next-line no-console
-  console.error('Error during Data Source initialization', err);
+  throw new AppError(
+    `Error during Data Source initialization ${err}`,
+    500,
+  );
 });

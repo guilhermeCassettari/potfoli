@@ -7,7 +7,9 @@
     "dev": "ts-node-dev --inspect -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/index.ts ",
     "lint": "eslint .",
     "start": "ts-node src/index.ts",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "mCreate": "ts-node ./scripts/createMigration.ts",
+    "mRun": "ts-node ./scripts/migrationRun.ts"
   },
   "dependencies": {
     "celebrate": "^15.0.3",
@@ -18,13 +20,14 @@
     "pg": "^8.4.0",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.8.0",
-    "typeorm": "0.3.20"
+    "typeorm": "0.3.20",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.7.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/node": "^16.11.10",
+    "@types/node": "^20.14.12",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
     "eslint": "9.x",
