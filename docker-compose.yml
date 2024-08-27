@@ -11,6 +11,8 @@ services:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     depends_on:
       - postgres
+    links:
+      - postgres:postgres
     env_file:
       - .env
     # command: yarn dev  # Adicionado para iniciar a aplicação em modo de desenvolvimento
@@ -31,8 +33,12 @@ services:
     env_file:
       - .env
     networks:
-    - my_network
+      my_network:
+        ipv4_address: 172.20.0.2
 
 networks:
   my_network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24

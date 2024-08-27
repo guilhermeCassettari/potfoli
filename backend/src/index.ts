@@ -28,12 +28,12 @@ app.use(
     if (error instanceof AppError) {
       return response.status(error.statusCode).json({
         status: 'error',
-        message: error.message,
+        message: error,
       });
     }
     return response.status(500).json({
       status: 'error',
-      message: `Internal server error- ${error.message}`,
+      message: `Internal server error- ${error}`,
     });
   },
 );

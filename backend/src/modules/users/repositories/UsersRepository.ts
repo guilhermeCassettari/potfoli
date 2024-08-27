@@ -3,6 +3,7 @@ import { User } from '../entities/User.entity';
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../../../shared/data-source';
 import { IUser } from '../entities/IUser';
+import AppError from '../../../shared/errors/AppError';
 
 class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>;
@@ -10,11 +11,11 @@ class UsersRepository implements IUsersRepository {
     this.ormRepository = AppDataSource.getRepository(User);
   }
   async create({
-    name = 'name',
-    email = 'email',
-    password = 'password',
-    phone = 123,
-  }: IUser): Promise<void> {
+    name,
+    email,
+    password,
+    phone,
+  }: IUser): Promise<IUser> {
     const user = this.ormRepository.create({
       name,
       email,
@@ -23,21 +24,66 @@ class UsersRepository implements IUsersRepository {
     });
 
     await this.ormRepository.save(user);
+
+    return user;
   }
-  update(): Promise<void> {
-    throw new Error('Method not implemented.');
+  async update({
+    name,
+    email,
+    password,
+    phone,
+    id,
+  }: IUser): Promise<void> {
+    if (!id) {
+      throw new AppError('Id is Required');
+    }
+    await this.ormRepository.update(id, {
+      name,
+      email,
+      password,
+      phone,
+    });
+
+    return Promise.resolve();
   }
-  delete(): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  delete(user: IUser): Promise<void> {
+    this.ormRepository.delete({
+      id: user.id,
+    });
+
+    return Promise.resolve();
   }
+
   show(): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  findById(): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  findById(id: string): Promise<IUser | null> {
+    const user = this.ormRepository.findOne({
+      where: { id },
+    });
+
+    return user;
   }
-  findByEmail(): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  findByEmail(email: string): Promise<IUser | null> {
+    const user = this.ormRepository.findOne({
+      where: { email },
+    });
+
+    return user;
+  }
+
+  async findUniqueUser({
+    name,
+    email,
+    phone,
+  }: IUser): Promise<IUser | null> {
+    const user = this.ormRepository.findOne({
+      where: [{ name }, { email }, { phone }],
+    });
+    return user;
   }
   async findAll(): Promise<User[]> {
     const users = await this.ormRepository.find();

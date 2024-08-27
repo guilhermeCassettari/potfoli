@@ -28,7 +28,7 @@ export class CreateUser1721764977885 implements MigrationInterface {
           },
           {
             name: 'phone',
-            type: 'int',
+            type: 'bigint',
             isUnique: true,
           },
           {

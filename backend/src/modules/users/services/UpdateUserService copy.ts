@@ -6,7 +6,7 @@ import AppError from '../../../shared/errors/AppError';
 import regexPassword from '../../../shared/regexPassword/regexPassword';
 
 @injectable()
-class CreateUserService {
+class UpdateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -17,8 +17,9 @@ class CreateUserService {
     email,
     password,
     phone,
+    id,
   }: IUser): Promise<IUser> {
-    if (!name || !email || !password || !phone) {
+    if (!name || !email || !password || !phone || !id) {
       throw new AppError(
         'Name, email, password and phone are required',
       );
@@ -26,25 +27,28 @@ class CreateUserService {
 
     regexPassword(password);
 
-    const isUniqueUser = await this.usersRepository.findUniqueUser({
-      email,
-      name,
-      phone,
-    });
+    const user = await this.usersRepository.findById(id);
 
-    if (isUniqueUser) {
-      throw new AppError('User already exists.');
+    if (!user) {
+      throw new AppError('User not found.');
     }
 
-    const user = await this.usersRepository.create({
+    await this.usersRepository.update({
       name,
       email,
       password,
       phone,
+      id,
     });
 
-    return user;
+    const updatedUser = await this.usersRepository.findById(id);
+
+    if (!updatedUser) {
+      throw new AppError('Error during update user.');
+    }
+
+    return updatedUser;
   }
 }
 
-export default CreateUserService;
+export default UpdateUserService;
