@@ -15,12 +15,14 @@ class UsersRepository implements IUsersRepository {
     email,
     password,
     phone,
+    id,
   }: IUser): Promise<IUser> {
-    const user = this.ormRepository.create({
+    const user = await this.ormRepository.create({
       name,
       email,
       password,
       phone,
+      id,
     });
 
     await this.ormRepository.save(user);
@@ -34,6 +36,7 @@ class UsersRepository implements IUsersRepository {
     phone,
     id,
   }: IUser): Promise<void> {
+    // TODO: Remover if
     if (!id) {
       throw new AppError('Id is Required');
     }
@@ -47,20 +50,16 @@ class UsersRepository implements IUsersRepository {
     return Promise.resolve();
   }
 
-  delete(user: IUser): Promise<void> {
-    this.ormRepository.delete({
+  async delete(user: IUser): Promise<void> {
+    await this.ormRepository.delete({
       id: user.id,
     });
 
     return Promise.resolve();
   }
 
-  show(): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-
-  findById(id: string): Promise<IUser | null> {
-    const user = this.ormRepository.findOne({
+  async findById(id: string): Promise<IUser | null> {
+    const user = await this.ormRepository.findOne({
       where: { id },
     });
 
@@ -88,9 +87,6 @@ class UsersRepository implements IUsersRepository {
   async findAll(): Promise<User[]> {
     const users = await this.ormRepository.find();
     return users;
-  }
-  saveUser(): Promise<void> {
-    throw new Error('Method not implemented.');
   }
 }
 

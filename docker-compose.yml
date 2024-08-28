@@ -15,13 +15,14 @@ services:
       - postgres:postgres
     env_file:
       - .env
-    # command: yarn dev  # Adicionado para iniciar a aplicação em modo de desenvolvimento
     networks:
       - my_network
 
 
   postgres:
     image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
     container_name: postgres
     environment:
       POSTGRES_USER: "${DATABASE_USERNAME}"
@@ -42,3 +43,6 @@ networks:
     ipam:
       config:
         - subnet: 172.20.0.0/24
+
+volumes:
+  db-data:

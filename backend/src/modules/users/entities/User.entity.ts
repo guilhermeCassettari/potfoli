@@ -1,13 +1,13 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  PrimaryColumn,
 } from 'typeorm';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn({ nullable: false, unique: true })
   id: string;
 
   @Column()
@@ -20,7 +20,7 @@ export class User {
   password: string;
 
   @Column()
-  phone: number;
+  phone: string;
 
   @CreateDateColumn()
   created_at: Date;

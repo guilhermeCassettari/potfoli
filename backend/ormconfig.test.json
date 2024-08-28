@@ -1,0 +1,8 @@
+{
+  "type": "postgres",
+  "database": "test_database",
+  "dropSchema": true,
+  "entities": ["src/module/**/entities/**/*.entity.ts"],
+  "synchronize": true,
+  "logging": false
+}

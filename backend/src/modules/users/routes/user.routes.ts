@@ -25,7 +25,7 @@ usersRouter.patch(
   '/',
   celebrate({
     [Segments.BODY]: Joi.object().keys({
-      id: Joi.number().required(),
+      id: Joi.string().required(),
       name: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
@@ -39,7 +39,7 @@ usersRouter.delete(
   '/',
   celebrate({
     [Segments.BODY]: Joi.object().keys({
-      id: Joi.number().required(),
+      id: Joi.string().required(),
     }),
   }),
   usersController.delete,

@@ -4,6 +4,8 @@ import { IUser } from '../entities/IUser';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 import AppError from '../../../shared/errors/AppError';
 import regexPassword from '../../../shared/regexPassword/regexPassword';
+import phoneValidate from '../shared/PhoneValidate';
+import { hashPassword } from '../../../shared/brypt/bcrypt';
 
 @injectable()
 class UpdateUserService {
@@ -27,17 +29,29 @@ class UpdateUserService {
 
     regexPassword(password);
 
+    const validPhone = phoneValidate(phone);
+
     const user = await this.usersRepository.findById(id);
 
     if (!user) {
       throw new AppError('User not found.');
     }
 
+    const isUniqueUser = await this.usersRepository.findUniqueUser({
+      email,
+      name,
+      phone: validPhone,
+    });
+
+    if (isUniqueUser && isUniqueUser.id !== id) {
+      throw new AppError('User already exists.');
+    }
+
     await this.usersRepository.update({
       name,
       email,
-      password,
-      phone,
+      password: hashPassword(password),
+      phone: validPhone,
       id,
     });
 
