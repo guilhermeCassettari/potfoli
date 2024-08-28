@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 import CreateUserService from '../services/CreateUserService';
 import ListUsersService from '../services/ListUsersService';
 import DeleteUserService from '../services/DeleteUserService';
-import UpdateUserService from '../services/UpdateUserService copy';
+import UpdateUserService from '../services/UpdateUserService';
 
 export default class UsersController {
   public async create(

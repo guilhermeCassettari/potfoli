@@ -3,7 +3,7 @@ import UsersRepository from '../UsersRepository';
 describe('UsersRepository', () => {
   let usersRepository: UsersRepository;
   const user = {
-    name: 'John Doe',
+    name: 'Jacinto Bug',
     email: 'john.doe@example.com',
     password: 'password',
     phone: '1234567890',
@@ -23,14 +23,14 @@ describe('UsersRepository', () => {
 
   it('should be able to create a new user', async () => {
     const createdUser = await usersRepository.create({
-      name: 'John Does',
+      name: 'Jacinto Bugs',
       email: 'john.dose@example.com',
       password: 'passaword',
       phone: '1234467890',
       id: '2',
     });
 
-    expect(createdUser.name).toEqual('John Does');
+    expect(createdUser.name).toEqual('Jacinto Bugs');
     expect(createdUser.email).toEqual('john.dose@example.com');
     expect(createdUser.password).toEqual('passaword');
     expect(createdUser.id).toEqual('2');
@@ -87,12 +87,12 @@ describe('UsersRepository', () => {
 
   it('should be able to find a unique user', async () => {
     const foundUser = await usersRepository.findUniqueUser({
-      name: 'John Doe',
+      name: 'Jacinto Bug',
       email: 'john.doe@example.com',
       phone: '1234567890',
     });
 
-    expect(foundUser).toHaveProperty('name', 'John Doe');
+    expect(foundUser).toHaveProperty('name', 'Jacinto Bug');
 
     const userNotFound = await usersRepository.findUniqueUser({
       name: 'Jacinto Bug Aqui',
@@ -103,12 +103,12 @@ describe('UsersRepository', () => {
     expect(userNotFound).toBeNull();
 
     const userNameFound = await usersRepository.findUniqueUser({
-      name: 'John Doe',
+      name: 'Jacinto Bug',
       email: 'jacintoBugAqui@example.com',
       phone: '11998745623',
     });
 
-    expect(userNameFound).toHaveProperty('name', 'John Doe');
+    expect(userNameFound).toHaveProperty('name', 'Jacinto Bug');
 
     const userEmailFound = await usersRepository.findUniqueUser({
       name: 'Jacinto Bug Aqui',
