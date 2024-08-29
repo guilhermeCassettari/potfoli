@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import { IUser } from '../../entities/IUser';
-import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { IUser } from '../../interface/IUser';
+import { IUsersRepository } from '../../interface/IUsersRepository';
 import ListUsersService from '../ListUsersService';
 
 describe('ListUsersService', () => {

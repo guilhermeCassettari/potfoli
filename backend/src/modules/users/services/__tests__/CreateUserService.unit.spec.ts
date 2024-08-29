@@ -1,12 +1,13 @@
 import 'reflect-metadata';
 import CreateUserService from '../CreateUserService';
-import { IUsersRepository } from '../../repositories/IUsersRepository';
-import { IUser } from '../../entities/IUser';
+
+import { IUser } from '../../interface/IUser';
 import regexPassword from '../../../../shared/regexPassword/regexPassword';
 import phoneValidate from '../../shared/PhoneValidate';
 import { uuid } from '../../../../shared/uuid/uuid';
 import { hashPassword } from '../../../../shared/brypt/bcrypt';
 import AppError from '../../../../shared/errors/AppError';
+import { IUsersRepository } from '../../interface/IUsersRepository';
 
 jest.mock('../../../../shared/regexPassword/regexPassword');
 jest.mock('../../shared/PhoneValidate');

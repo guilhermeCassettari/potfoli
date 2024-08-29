@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { IUser } from '../entities/IUser';
+import { IUser } from '../interface/IUser';
 import { User } from '../entities/User.entity';
 
 export interface IUsersRepository {

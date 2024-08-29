@@ -6,6 +6,7 @@ dotenv.config({
   path: path.resolve(__dirname, '..', '..', '..', '..', '.env'),
 });
 
+// TODO, TRANSFORMAM EM FUNÇÃO
 export class GetEnv {
   get dbType(): 'postgres' | 'mysql' {
     if (!process.env.DATABASE_TYPE) {
@@ -61,5 +62,12 @@ export class GetEnv {
       throw new AppError('Backend port not found', 500);
     }
     return Number(process.env.BACKEND_PORT);
+  }
+
+  get jwtSecret(): string {
+    if (!process.env.JWT_SECRET) {
+      throw new AppError('JWT secret not found', 500);
+    }
+    return process.env.JWT_SECRET;
   }
 }

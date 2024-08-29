@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IUser } from '../entities/IUser';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { IUser } from '../interface/IUser';
+import { IUsersRepository } from '../interface/IUsersRepository';
 
 @injectable()
 class ListUsersService {

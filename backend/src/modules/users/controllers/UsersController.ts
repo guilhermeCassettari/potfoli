@@ -4,6 +4,7 @@ import CreateUserService from '../services/CreateUserService';
 import ListUsersService from '../services/ListUsersService';
 import DeleteUserService from '../services/DeleteUserService';
 import UpdateUserService from '../services/UpdateUserService';
+import CreateSessionService from '../services/CreateSessionService';
 
 export default class UsersController {
   public async create(
@@ -71,5 +72,21 @@ export default class UsersController {
     const listUser = await users.execute();
 
     return response.json(listUser);
+  }
+
+  public async login(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { email, password } = request.body;
+
+    const users = container.resolve(CreateSessionService);
+
+    const user = await users.execute({
+      email,
+      password,
+    });
+
+    return response.json(user);
   }
 }

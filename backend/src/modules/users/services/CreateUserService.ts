@@ -1,12 +1,13 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IUser } from '../entities/IUser';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { IUser } from '../interface/IUser';
+
 import AppError from '../../../shared/errors/AppError';
 import regexPassword from '../../../shared/regexPassword/regexPassword';
 import phoneValidate from '../shared/PhoneValidate';
 import { uuid } from '../../../shared/uuid/uuid';
 import { hashPassword } from '../../../shared/brypt/bcrypt';
+import { IUsersRepository } from '../interface/IUsersRepository';
 
 @injectable()
 class CreateUserService {

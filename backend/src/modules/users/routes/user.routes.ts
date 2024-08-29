@@ -45,4 +45,15 @@ usersRouter.delete(
   usersController.delete,
 );
 
+usersRouter.post(
+  '/login',
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    }),
+  }),
+  usersController.login,
+);
+
 export default usersRouter;

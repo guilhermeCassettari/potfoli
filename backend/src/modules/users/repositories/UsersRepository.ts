@@ -1,9 +1,9 @@
-import { IUsersRepository } from './IUsersRepository';
 import { User } from '../entities/User.entity';
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../../../shared/data-source';
-import { IUser } from '../entities/IUser';
+import { IUser } from '../interface/IUser';
 import AppError from '../../../shared/errors/AppError';
+import { IUsersRepository } from '../interface/IUsersRepository';
 
 class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>;
