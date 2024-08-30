@@ -1,15 +1,17 @@
 import { Router } from 'express';
 import UsersController from '../controllers/UsersController';
 import { celebrate, Joi, Segments } from 'celebrate';
+import isAuthenticated from '../../../shared/auth/isAuthenticated';
 
 const usersRouter = Router();
 
 const usersController = new UsersController();
 
-usersRouter.get('/', usersController.findAll);
+usersRouter.get('/', isAuthenticated, usersController.findAll);
 
 usersRouter.post(
   '/',
+  isAuthenticated,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required(),
@@ -23,6 +25,7 @@ usersRouter.post(
 
 usersRouter.patch(
   '/',
+  isAuthenticated,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       id: Joi.string().required(),
@@ -37,6 +40,7 @@ usersRouter.patch(
 
 usersRouter.delete(
   '/',
+  isAuthenticated,
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       id: Joi.string().required(),

@@ -2,56 +2,54 @@ import * as bcrypt from 'bcrypt';
 import { hashPassword, comparePassword } from '../bcrypt';
 
 jest.mock('bcrypt');
-describe('Bcrypt', () => {
-  const plainPassword = 'mySecretPassword123!';
-  const hashedPassword = 'hashedPassword123';
 
-  beforeEach(() => {
-    (bcrypt.hashSync as jest.Mock).mockImplementation(
+describe('hashPassword', () => {
+  it('should hash a password', async () => {
+    const password = 'mySecretPassword123!';
+    const hashedPassword = 'hashedPassword123';
+
+    (bcrypt.hash as jest.Mock).mockImplementation(
       () => hashedPassword,
     );
 
-    (bcrypt.compareSync as jest.Mock).mockImplementation(
-      (password, hash) => {
-        return password === plainPassword && hash === hashedPassword;
-      },
-    );
+    const result = await hashPassword(password);
+    expect(result).toBe(hashedPassword);
+    expect(bcrypt.hash).toHaveBeenCalledTimes(1);
+    expect(bcrypt.hash).toHaveBeenCalledWith(password, 10);
   });
+});
 
+describe('comparePassword', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
+  it('should return true if the password matches the hashed password', async () => {
+    const password = 'mySecretPassword123!';
+    const hashedPassword = 'hashedPassword123';
 
-  it('should be able to hash a password', () => {
-    const hashedPassword = hashPassword(plainPassword);
-    expect(hashedPassword).toBe(hashedPassword);
-    expect(bcrypt.hashSync).toHaveBeenCalledWith(plainPassword, 10);
-  });
+    (bcrypt.compare as jest.Mock).mockImplementation(() => true);
 
-  it('should generate a hash that is not equal to the original password', () => {
-    const result = hashPassword(plainPassword);
-    expect(result).not.toBe(plainPassword);
-  });
-
-  it('should return true if the password matches the hashed password', () => {
-    const result = comparePassword(plainPassword, hashedPassword);
+    const result = await comparePassword(password, hashedPassword);
     expect(result).toBe(true);
-    expect(bcrypt.compareSync).toHaveBeenCalledWith(
-      plainPassword,
+    expect(bcrypt.compare).toHaveBeenCalledTimes(1);
+    expect(bcrypt.compare).toHaveBeenCalledWith(
+      password,
       hashedPassword,
     );
   });
 
-  it('should return false if the password does not match the hashed password', () => {
-    const result = comparePassword('wrongPassword', hashedPassword);
-    expect(result).toBe(false);
-  });
+  it('should return false if the password does not match the hashed password', async () => {
+    const password = 'wrongPassword';
+    const hashedPassword = 'hashedPassword123';
 
-  it('should return false if the hashed password does not match', () => {
-    const result = comparePassword(
-      plainPassword,
-      'differentHashedPassword',
-    );
+    (bcrypt.compare as jest.Mock).mockImplementation(() => false);
+
+    const result = await comparePassword(password, hashedPassword);
     expect(result).toBe(false);
+    expect(bcrypt.compare).toHaveBeenCalledTimes(1);
+    expect(bcrypt.compare).toHaveBeenCalledWith(
+      password,
+      hashedPassword,
+    );
   });
 });

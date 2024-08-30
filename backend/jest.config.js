@@ -6,6 +6,7 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  testMatch: ['**/*.spec.ts'],
+  testMatch: ['<rootDir>/src/**/*.spec.ts'],
+  coveragePathIgnorePatterns: ['<rootDir>/migrations/'],
   testEnvironment: 'node',
 };

@@ -11,7 +11,7 @@
     "mcreate": "ts-node ./scripts/createMigration.ts",
     "mrun": "ts-node ./scripts/migrationRun.ts",
     "migrationRevert": "ts-node ./scripts/migrationRevert.ts",
-    "test": "jest --detectOpenHandles --coverage  "
+    "test": "jest --detectOpenHandles --coverage"
   },
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.6",

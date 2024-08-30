@@ -47,10 +47,12 @@ class UpdateUserService {
       throw new AppError('User already exists.');
     }
 
+    const hashedPassword = await hashPassword(password);
+
     await this.usersRepository.update({
       name,
       email,
-      password: hashPassword(password),
+      password: hashedPassword,
       phone: validPhone,
       id,
     });
