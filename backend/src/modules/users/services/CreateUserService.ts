@@ -5,7 +5,6 @@ import { IUser } from '../interface/IUser';
 import AppError from '../../../shared/errors/AppError';
 import regexPassword from '../../../shared/regexPassword/regexPassword';
 import phoneValidate from '../shared/PhoneValidate';
-import { uuid } from '../../../shared/uuid/uuid';
 import { hashPassword } from '../../../shared/brypt/bcrypt';
 import { IUsersRepository } from '../interface/IUsersRepository';
 
@@ -49,7 +48,6 @@ class CreateUserService {
       email,
       password: hashedPassword,
       phone: validPhone,
-      id: uuid(),
     });
 
     return user;

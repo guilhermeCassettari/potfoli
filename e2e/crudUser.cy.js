@@ -9,8 +9,8 @@ describe('Crud User', () => {
 
   beforeEach(function () {
     cy.request('POST', `${baseUrl}/users/login`, {
-      email: 'tested@tesrt23ea.com',
-      password: '_Ozzy080191',
+      email: 'test@example.com',
+      password: '_Secure1234567890',
     }).then(response => {
       this.token = response.body.token;
 
