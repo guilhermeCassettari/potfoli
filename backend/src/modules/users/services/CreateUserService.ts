@@ -32,15 +32,15 @@ class CreateUserService {
 
     const validPhone = phoneValidate(phone);
 
-    // const isUniqueUser = await this.usersRepository.findUniqueUser({
-    //   email,
-    //   name,
-    //   phone: validPhone,
-    // });
+    const isUniqueUser = await this.usersRepository.findUniqueUser({
+      email,
+      name,
+      phone: validPhone,
+    });
 
-    // if (isUniqueUser) {
-    //   throw new AppError('User already exists.');
-    // }
+    if (isUniqueUser) {
+      throw new AppError('User already exists.');
+    }
 
     const hashedPassword = await hashPassword(password);
 

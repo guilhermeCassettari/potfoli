@@ -49,6 +49,12 @@ usersRouter.delete(
   usersController.delete,
 );
 
+usersRouter.delete(
+  '/test',
+  isAuthenticated,
+  usersController.deleteUserTest,
+);
+
 usersRouter.post(
   '/login',
   celebrate({

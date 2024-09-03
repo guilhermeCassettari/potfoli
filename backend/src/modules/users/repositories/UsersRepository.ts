@@ -1,5 +1,5 @@
 import { User } from '../entities/User.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { AppDataSource } from '../../../shared/data-source';
 import { IUser } from '../interface/IUser';
 import AppError from '../../../shared/errors/AppError';
@@ -53,6 +53,14 @@ class UsersRepository implements IUsersRepository {
   async delete(user: IUser): Promise<void> {
     await this.ormRepository.delete({
       id: user.id,
+    });
+
+    return Promise.resolve();
+  }
+
+  async deleteTestUser(): Promise<void> {
+    await this.ormRepository.delete({
+      name: Like('%[test]%'),
     });
 
     return Promise.resolve();

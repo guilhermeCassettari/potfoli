@@ -54,6 +54,18 @@ export default class UsersController {
     });
   }
 
+  public async deleteUserTest(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const user = container.resolve(DeleteUserService);
+    await user.deleteTest();
+
+    return response.json({
+      message: 'User deleted',
+    });
+  }
+
   public async show(
     request: Request,
     response: Response,

@@ -27,6 +27,10 @@ class DeleteUserService {
 
     return Promise.resolve();
   }
+
+  public async deleteTest(): Promise<void> {
+    await this.usersRepository.deleteTestUser();
+  }
 }
 
 export default DeleteUserService;
