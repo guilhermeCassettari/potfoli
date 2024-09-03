@@ -6,8 +6,14 @@ dotenv.config({
   path: path.resolve(__dirname, '..', '..', '..', '..', '.env'),
 });
 
-// TODO, TRANSFORMAM EM FUNÇÃO
 export class GetEnv {
+  private static instance: GetEnv;
+  public static getInstance() {
+    if (!GetEnv.instance) {
+      GetEnv.instance = new GetEnv();
+    }
+    return GetEnv.instance;
+  }
   get dbType(): 'postgres' | 'mysql' {
     if (!process.env.DATABASE_TYPE) {
       throw new AppError('Database type not found', 500);

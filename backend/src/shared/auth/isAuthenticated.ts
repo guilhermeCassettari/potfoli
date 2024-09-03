@@ -13,7 +13,7 @@ export default function isAuthenticated(
 ): void {
   const authHeader = request.headers.authorization;
   // TODO, REFACT
-  const getEnv = new GetEnv();
+  const getEnv = GetEnv.getInstance();
 
   if (!authHeader) {
     throw new Error('JWT Token not found');

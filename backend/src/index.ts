@@ -9,7 +9,7 @@ import AppError from './shared/errors/AppError';
 import './shared/container';
 import routes from './routes';
 
-const getEnv = new GetEnv();
+const getEnv = GetEnv.getInstance();
 const app = express();
 
 app.use(cors());

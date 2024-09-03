@@ -8,7 +8,7 @@ import { IUserToken } from '../interface/IUserToken';
 import { IUsersRepository } from '../interface/IUsersRepository';
 import { sign } from 'jsonwebtoken';
 
-const getEnv = new GetEnv();
+const getEnv = GetEnv.getInstance();
 @injectable()
 class CreateSessionService {
   constructor(

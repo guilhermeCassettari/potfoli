@@ -5,7 +5,7 @@ import { User } from '../modules/users/entities/User.entity';
 import { GetEnv } from './getEnv/GetEnv';
 import AppError from './errors/AppError';
 
-const getEnv = new GetEnv();
+const getEnv = GetEnv.getInstance();
 const migrationPath = path.join(
   __dirname,
   '..',

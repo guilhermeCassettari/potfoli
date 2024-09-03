@@ -20,6 +20,7 @@ describe('DeleteUserService', () => {
     usersRepository = {
       findById: jest.fn(),
       delete: jest.fn(),
+      deleteTestUser: jest.fn(),
     } as unknown as jest.Mocked<IUsersRepository>;
 
     deleteUserService = new DeleteUserService(usersRepository);
@@ -51,6 +52,13 @@ describe('DeleteUserService', () => {
     usersRepository.delete.mockResolvedValueOnce();
     await expect(
       deleteUserService.execute({ id: userData.id }),
+    ).resolves.not.toThrow();
+  });
+
+  it('should be able to delete a user test', async () => {
+    usersRepository.deleteTestUser.mockResolvedValueOnce();
+    await expect(
+      deleteUserService.deleteTest(),
     ).resolves.not.toThrow();
   });
 });
