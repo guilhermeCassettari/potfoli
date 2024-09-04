@@ -1,5 +1,7 @@
 import { AppDataSource } from '../../../../shared/data-source';
+import { uuid } from '../../../../shared/uuid/uuid';
 import UsersRepository from '../UsersRepository';
+
 describe('UsersRepository', () => {
   let usersRepository: UsersRepository;
   const user = {
@@ -7,7 +9,7 @@ describe('UsersRepository', () => {
     email: 'john.doe@example.com',
     password: 'password',
     phone: '1234567890',
-    id: '1',
+    id: uuid(),
   };
 
   beforeEach(async () => {
@@ -22,18 +24,19 @@ describe('UsersRepository', () => {
   });
 
   it('should be able to create a new user', async () => {
+    const idUser = uuid();
     const createdUser = await usersRepository.create({
       name: 'Jacinto Bugs',
       email: 'john.dose@example.com',
       password: 'passaword',
       phone: '1234467890',
-      id: '2',
+      id: idUser,
     });
 
     expect(createdUser.name).toEqual('Jacinto Bugs');
     expect(createdUser.email).toEqual('john.dose@example.com');
     expect(createdUser.password).toEqual('passaword');
-    expect(createdUser.id).toEqual('2');
+    expect(createdUser.id).toEqual(idUser);
   });
 
   it('should be able to update a user', async () => {
@@ -44,7 +47,7 @@ describe('UsersRepository', () => {
 
     expect(updatedUser).toBeUndefined();
 
-    const updatedUserFromDB = await usersRepository.findById('1');
+    const updatedUserFromDB = await usersRepository.findById(user.id);
 
     if (!updatedUserFromDB) {
       throw new Error('User not found');
@@ -68,7 +71,7 @@ describe('UsersRepository', () => {
 
     expect(foundUser).toHaveProperty('id', user.id);
 
-    const userNotFound = await usersRepository.findById('321');
+    const userNotFound = await usersRepository.findById(uuid());
 
     expect(userNotFound).toBeNull();
   });

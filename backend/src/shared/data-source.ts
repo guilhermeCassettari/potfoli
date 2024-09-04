@@ -4,6 +4,7 @@ import { DataSource } from 'typeorm';
 import { User } from '../modules/users/entities/User.entity';
 import { GetEnv } from './getEnv/GetEnv';
 import AppError from './errors/AppError';
+import { UploadImage } from '../modules/upload/entities/UploadImage.entity';
 
 const getEnv = GetEnv.getInstance();
 const migrationPath = path.join(
@@ -23,7 +24,7 @@ export const AppDataSource = new DataSource({
   database: getEnv.dbName,
   synchronize: true,
   logging: false,
-  entities: [User],
+  entities: [User, UploadImage],
   migrations: [migrationPath],
 
   subscribers: [],

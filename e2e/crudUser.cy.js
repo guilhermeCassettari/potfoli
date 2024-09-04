@@ -49,7 +49,6 @@ describe('Crud User', () => {
 
   it('should be able to create a new user', function () {
     let createdUser;
-    console.log(this.token);
     cy.request({
       method: 'POST',
       url: `${baseUrl}/users`,
@@ -63,8 +62,6 @@ describe('Crud User', () => {
         phone: '1499711561',
       },
     }).then(response => {
-      console.log('response');
-      console.log(response);
       expect(response.status).to.eq(200);
       expect(response.body.email).to.eq('example@example.com');
       expect(response.body.phone).to.eq('1499711561');

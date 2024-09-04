@@ -30,7 +30,6 @@ describe('CreateUserService', () => {
     (phoneValidate as jest.Mock).mockImplementation(
       () => '1234567890',
     );
-    (uuid as jest.Mock).mockImplementation(() => 'generated-uuid');
     (hashPassword as jest.Mock).mockImplementation(
       () => 'hashed-password',
     );
@@ -43,11 +42,12 @@ describe('CreateUserService', () => {
       password: '_Testee12345',
       phone: '1234567890',
     };
+    const userId = uuid();
 
     usersRepository.findUniqueUser.mockResolvedValue(null);
     usersRepository.create.mockResolvedValue({
       ...userData,
-      id: 'generated-uuid',
+      id: userId,
       password: 'hashed-password',
     });
 
@@ -64,7 +64,7 @@ describe('CreateUserService', () => {
       email: userData.email,
       password: 'hashed-password',
       phone: '1234567890',
-      id: 'generated-uuid',
+      id: userId,
     });
 
     expect(user).toEqual({
@@ -72,7 +72,7 @@ describe('CreateUserService', () => {
       email: userData.email,
       password: 'hashed-password',
       phone: '1234567890',
-      id: 'generated-uuid',
+      id: userId,
     });
   });
 

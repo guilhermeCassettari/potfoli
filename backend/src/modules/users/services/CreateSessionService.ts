@@ -28,15 +28,11 @@ class CreateSessionService {
         401,
       );
     }
-    console.log(user.password);
-    console.log(password);
 
     const passwordConfirmed = comparePassword(
       password,
       user.password,
     );
-
-    console.log(passwordConfirmed);
 
     if (!passwordConfirmed) {
       throw new AppError(
