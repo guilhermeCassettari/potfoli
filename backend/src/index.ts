@@ -44,3 +44,5 @@ app.listen(getEnv.backendPort, () => {
     `Example app listening at http://localhost:${getEnv.backendPort} 🔥`,
   );
 });
+
+export { app };

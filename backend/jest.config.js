@@ -13,5 +13,6 @@ module.exports = {
     'src/**/*.{ts,tsx}', // Coleta cobertura de todos os arquivos .ts e .tsx dentro de src
     '!src/**/*.d.ts', // Exclui arquivos de definição de tipos
     '!src/**/index.ts', // Opcional: exclui arquivos index.ts, se não precisar de cobertura para eles
+    '!src/config/*.ts',
   ],
 };

@@ -14,17 +14,17 @@ class UploadImageService {
     name,
     mimetype,
     data,
-  }: IUploadImage): Promise<void> {
+  }: IUploadImage): Promise<IUploadImage> {
     if (!name || !mimetype || !data) {
       throw new AppError('Name, mimetype and data are required');
     }
-    await this.imageRepository.create({
+    const image = await this.imageRepository.create({
       name,
       mimetype,
       data,
     });
 
-    return;
+    return image;
   }
 }
 
