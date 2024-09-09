@@ -23,7 +23,7 @@ export class UploadImage1725456005670 implements MigrationInterface {
           },
           {
             name: 'data',
-            type: 'bytea',
+            type: 'varchar',
           },
         ],
       }),

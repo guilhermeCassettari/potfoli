@@ -10,7 +10,7 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "mcreate": "ts-node ./scripts/createMigration.ts",
     "mrun": "ts-node ./scripts/migrationRun.ts",
-    "migrationRevert": "ts-node ./scripts/migrationRevert.ts",
+    "mrevert": "ts-node ./scripts/migrationRevert.ts",
     "test": "jest --detectOpenHandles --coverage"
   },
   "dependencies": {

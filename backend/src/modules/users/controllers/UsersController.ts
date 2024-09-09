@@ -73,7 +73,12 @@ export default class UsersController {
     const users = container.resolve(ListUsersService);
     const listUser = await users.execute();
 
-    return response.json(listUser);
+    const listUserWithoutPassword = listUser.map(user => {
+      delete user.password;
+      return user;
+    });
+
+    return response.json(listUserWithoutPassword);
   }
 
   public async findAll(
@@ -83,7 +88,12 @@ export default class UsersController {
     const users = container.resolve(ListUsersService);
     const listUser = await users.execute();
 
-    return response.json(listUser);
+    const listUserWitouhPassword = listUser.map(user => {
+      delete user.password;
+      return user;
+    });
+
+    return response.json(listUserWitouhPassword);
   }
 
   public async login(
@@ -94,11 +104,16 @@ export default class UsersController {
 
     const users = container.resolve(CreateSessionService);
 
-    const user = await users.execute({
+    const { user, token } = await users.execute({
       email,
       password,
     });
 
-    return response.json(user);
+    delete user.password;
+
+    return response.json({
+      user,
+      token,
+    });
   }
 }

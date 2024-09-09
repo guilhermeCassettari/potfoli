@@ -8,8 +8,8 @@ export class UploadImage {
   @Column()
   name: string;
 
-  @Column({ type: 'bytea' })
-  data: Buffer;
+  @Column()
+  data: string;
 
   @Column()
   mimetype: string;

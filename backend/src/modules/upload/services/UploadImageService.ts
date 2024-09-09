@@ -18,10 +18,13 @@ class UploadImageService {
     if (!name || !mimetype || !data) {
       throw new AppError('Name, mimetype and data are required');
     }
+
+    const base64Data = Buffer.from(data).toString('base64');
+
     const image = await this.imageRepository.create({
       name,
       mimetype,
-      data,
+      data: base64Data,
     });
 
     return image;
