@@ -7,9 +7,7 @@ const pagesRouter = Router();
 const pagesController = new PagesController();
 const upload = multer();
 
-pagesRouter.get('/home', (req, res) => {
-  return res.json({ ok: true });
-});
+pagesRouter.get('/home', pagesController.getHomePage);
 
 pagesRouter.post(
   '/home',

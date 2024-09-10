@@ -41,6 +41,11 @@ class PagesRepository implements IHomePageRepository {
     const hasHomePage = await this.ormRepository.find();
     return hasHomePage;
   }
+
+  async getHomePage(): Promise<HomePage> {
+    const homePage = await this.ormRepository.find();
+    return homePage[0];
+  }
 }
 
 export default PagesRepository;
