@@ -12,7 +12,7 @@ export default function isAuthenticated(
   next: NextFunction,
 ): void {
   const authHeader = request.headers.authorization;
-  // TODO, REFACT
+
   const getEnv = GetEnv.getInstance();
 
   if (!authHeader) {

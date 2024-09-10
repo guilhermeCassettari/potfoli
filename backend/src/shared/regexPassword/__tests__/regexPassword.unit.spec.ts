@@ -4,14 +4,14 @@ import regexPassword from '../regexPassword';
 describe('regexPassword', () => {
   it('should throw an error if the password does not meet the requirements', () => {
     const invalidPasswords = [
-      'short', // Too short
-      'nouppercase1!', // No uppercase letter
-      'NOLOWERCASE1!', // No lowercase letter
-      'NoSpecialChar123', // No special character
-      'Valid1Password', // Valid but without special character (assuming the regex is strict)
-      '12345678', // Only numbers
-      'ABCdefgh', // Uppercase and lowercase letters only
-      'aB1!', // Too short
+      'short',
+      'nouppercase1!',
+      'NOLOWERCASE1!',
+      'NoSpecialChar123',
+      'Valid1Password',
+      '12345678',
+      'ABCdefgh',
+      'aB1!',
     ];
 
     invalidPasswords.forEach(password => {

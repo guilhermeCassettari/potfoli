@@ -18,7 +18,6 @@ describe('isAuthenticated Middleware', () => {
     mockResponse = {};
     mockNext = jest.fn();
 
-    // Mock do getEnv para retornar um segredo fictício
     (GetEnv.getInstance as jest.Mock).mockReturnValue({
       jwtSecret: 'test-secret',
     });
@@ -49,7 +48,6 @@ describe('isAuthenticated Middleware', () => {
   it('should throw an error if token is invalid', () => {
     mockRequest.headers!.authorization = 'Bearer invalid-token';
 
-    // Mock do verify para lançar um erro indicando que o token é inválido
     (verify as jest.Mock).mockImplementation(() => {
       throw new AppError('Invalid token');
     });
@@ -66,7 +64,6 @@ describe('isAuthenticated Middleware', () => {
   it('should call next function if token is valid', () => {
     mockRequest.headers!.authorization = 'Bearer valid-token';
 
-    // Mock do verify para retornar um sub (id do usuário)
     (verify as jest.Mock).mockReturnValue({
       sub: 'user-id',
     });
