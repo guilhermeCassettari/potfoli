@@ -5,6 +5,7 @@ import { User } from '../modules/users/entities/User.entity';
 import { GetEnv } from './getEnv/GetEnv';
 import AppError from './errors/AppError';
 import { UploadImage } from '../modules/upload/entities/UploadImage.entity';
+import { HomePage } from '../modules/pages/entities/HomePage.entity';
 
 const getEnv = GetEnv.getInstance();
 const migrationPath = path.join(
@@ -24,7 +25,7 @@ export const AppDataSource = new DataSource({
   database: getEnv.dbName,
   synchronize: true,
   logging: false,
-  entities: [User, UploadImage],
+  entities: [User, UploadImage, HomePage],
   migrations: [migrationPath],
 
   subscribers: [],

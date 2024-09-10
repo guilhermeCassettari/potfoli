@@ -29,11 +29,17 @@ app.use(
       return response.status(error.statusCode).json({
         status: 'error',
         message: error,
+        file:
+          error.stack &&
+          error.stack.split('\n')[1].trim().split(':')[0],
       });
     }
     return response.status(500).json({
       status: 'error',
       message: `Internal server error- ${error}`,
+      file:
+        error.stack &&
+        error.stack.split('\n')[1].trim().split(':')[0],
     });
   },
 );

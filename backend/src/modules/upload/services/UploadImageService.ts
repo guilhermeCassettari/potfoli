@@ -21,6 +21,17 @@ class UploadImageService {
 
     const base64Data = Buffer.from(data).toString('base64');
 
+    const hasImage = await this.imageRepository.findByName(name);
+    if (hasImage && hasImage.id) {
+      await this.imageRepository.update(hasImage.id, {
+        name,
+        mimetype,
+        data: base64Data,
+      });
+
+      return hasImage;
+    }
+
     const image = await this.imageRepository.create({
       name,
       mimetype,

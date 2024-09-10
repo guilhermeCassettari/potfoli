@@ -17,7 +17,7 @@ export default class ImageController {
     const image = await uploadImage.execute({
       name: originalname,
       mimetype,
-      data: buffer,
+      data: `${buffer}`,
     });
 
     return response.json(image);

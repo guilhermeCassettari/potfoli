@@ -5,4 +5,5 @@ export interface IUploadImageRepository {
   findByName(name: string): Promise<IUploadImage | null>;
   delete(name: string): Promise<void>;
   findAll(): Promise<IUploadImage[]>;
+  update(id: string, image: IUploadImage): Promise<void>;
 }

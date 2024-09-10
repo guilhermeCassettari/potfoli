@@ -5,6 +5,8 @@ import { IUsersRepository } from '../../modules/users/interface/IUsersRepository
 
 import { IUploadImageRepository } from '../../modules/upload/interface/IUploadImageRepository';
 import ImageRepository from '../../modules/upload/repositories/UploadImageReository';
+import { IHomePageRepository } from '../../modules/pages/interface/IHomePageRepository';
+import PagesRepository from '../../modules/pages/repositories/PagesRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -14,4 +16,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IUploadImageRepository>(
   'ImageRepository',
   ImageRepository,
+);
+
+container.registerSingleton<IHomePageRepository>(
+  'PagesRepository',
+  PagesRepository,
 );
