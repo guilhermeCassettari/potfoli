@@ -4,10 +4,11 @@ import { errors } from 'celebrate';
 
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
-import { GetEnv } from './shared/getEnv/GetEnv';
+
 import AppError from './shared/errors/AppError';
 import './shared/container';
 import routes from './routes';
+import { GetEnv } from './shared/getEnv/GetEnv';
 
 const getEnv = GetEnv.getInstance();
 const app = express();

@@ -3,10 +3,10 @@ import { comparePassword } from '../../../shared/brypt/bcrypt';
 import AppError from '../../../shared/errors/AppError';
 
 import { IUser } from '../interface/IUser';
-import { GetEnv } from '../../../shared/getEnv/GetEnv';
 import { IUserToken } from '../interface/IUserToken';
 import { IUsersRepository } from '../interface/IUsersRepository';
 import { sign } from 'jsonwebtoken';
+import { GetEnv } from '../../../shared/getEnv/GetEnv';
 
 const getEnv = GetEnv.getInstance();
 @injectable()

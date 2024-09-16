@@ -6,5 +6,5 @@ export interface ISetHomePage {
 
 export interface IPage {
   impact_phrase: string;
-  social_medias: { name: string; url: string }[];
+  social_medias?: { name: string; url: string }[];
 }

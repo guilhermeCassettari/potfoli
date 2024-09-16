@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import path from "path";
-import AppError from "./backend/src/shared/errors/AppError";
+import AppError from "../backend/src/shared/errors/AppError";
 
 dotenv.config({
   path: path.resolve(__dirname, "..", "..", "..", "..", ".env"),
