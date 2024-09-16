@@ -32,7 +32,7 @@ imageRouter.post(
   imageControler.create,
 );
 
-imageRouter.get('/:name', isAuthenticated, imageControler.findOne);
+imageRouter.get('/:name', imageControler.findOne);
 
 imageRouter.delete('/:name', isAuthenticated, imageControler.delete);
 

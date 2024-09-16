@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "path": "^0.12.7"
+  },
+  "name": "potfoli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:guilhermeCassettari/potfoli.git",
+  "author": "Guilherme Cassettari <guizaocassettari@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.5.5"
+  }
+}

@@ -27,23 +27,19 @@ export default class SetHomePageService {
     }
 
     if (image) {
-      const { mimetype, buffer } = image;
-
-      const imageBase64 = Buffer.from(buffer).toString('base64');
-
       const hasImage =
         await this.imageRepository.findByName('home_page');
       if (hasImage && hasImage.id) {
         await this.imageRepository.update(hasImage.id, {
           name: 'home_page',
-          mimetype,
-          data: `${imageBase64}`,
+          mimetype: image.mimetype,
+          data: image,
         });
       } else {
         await this.imageRepository.create({
           name: 'home_page',
-          mimetype,
-          data: `${imageBase64}`,
+          mimetype: image.mimetype,
+          data: image,
         });
       }
     }

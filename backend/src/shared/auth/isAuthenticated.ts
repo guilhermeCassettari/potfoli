@@ -16,13 +16,13 @@ export default function isAuthenticated(
   const getEnv = GetEnv.getInstance();
 
   if (!authHeader) {
-    throw new Error('JWT Token not found');
+    throw new AppError('JWT Token not found');
   }
 
   const [, token] = authHeader.split(' ');
 
   if (!token) {
-    throw new Error('JWT Token not found');
+    throw new AppError('JWT Token not found 2');
   }
 
   try {
