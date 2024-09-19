@@ -5,7 +5,7 @@ const Button: React.FC<{
 }> = ({ children, className, style }) => {
   return (
     <button
-      className={`${className} bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  mx-2 rounded-xl	`}
+      className={`${className} h-[60px] w-[311px] text-2xl font-medium border border-white`}
       style={style}
     >
       {children}

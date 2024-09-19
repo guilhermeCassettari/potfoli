@@ -6,14 +6,15 @@ import TypingEffect from './typingEffect';
 import { useEffect, useState } from 'react';
 import { AnimationSequence, useAnimate } from 'framer-motion';
 import useHomeAnimation from '@/hooks/useHomeAnimation';
+import { motion } from 'framer-motion';
 
 const HomePage: React.FC<{ srcImage: string; impact_phrase: string }> = ({
   srcImage,
   impact_phrase,
 }) => {
-  const [impactComplete, setImpactComplete] = useState(false);
+  const [impactComplete, setImpactComplete] = useState(true);
 
-  const scope = useHomeAnimation(true);
+  // const scope = useHomeAnimation(true);
 
   const handleAnimationComplete = () => {
     setTimeout(() => {
@@ -22,67 +23,41 @@ const HomePage: React.FC<{ srcImage: string; impact_phrase: string }> = ({
   };
 
   return (
-    <div ref={scope}>
+    <motion.div
+      className="col-start-2 col-end-6"
+      // ref={scope}
+    >
       <ImpactPhrase
         prase={impact_phrase}
         handlePhraseComplete={handleAnimationComplete}
       />
 
-      <div
-        className="home-page__container flex grow justify-between items-center border-white border-2 rounded-lg p-5"
-        style={{ width: '0px', height: '0px', opacity: '0' }}
-      >
-        <div>
-          <TypingEffect
-            delay={6}
-            className="text-white text-xl"
-            text={'<Guilherme Cassettari Developer />'}
-          />
-          <div className="flex flex-col items-center  justify-center gap-4">
-            <Button
-              style={{
-                width: '0px',
-                height: '0px',
-                border: '0px',
-                opacity: '0',
-              }}
-              className="home-page__button-recrutier"
-            >
-              Sou Recrutador
+      <motion.div className="home-page__container flex grow justify-between items-center h-[37.5rem] w-full">
+        <motion.div>
+          <motion.div className="min-h-[55px] ">
+            <TypingEffect
+              textCss="text-white text-2xl font-bold "
+              text={'Implementações Full Stack para decolar seu projeto'}
+              cursor={true}
+            />
+          </motion.div>
+          <motion.div className="flex flex-col items-start justify-between h-[224px] mt-16">
+            <Button className="home-page__button-recrutier">
+              Tech Recrutier
             </Button>
-            <Button
-              className="home-page__button-freela"
-              style={{
-                // width: '0px',
-                // height: '0px',
-                border: '0px',
-                opacity: '0',
-              }}
-            >
-              Quero Freela
-            </Button>
-            <Button
-              className="home-page__button-curious"
-              style={{
-                // width: '0px',
-                // height: '0px',
-                border: '0px',
-                opacity: '0',
-              }}
-            >
-              Sou Curioso
-            </Button>
-          </div>
-        </div>
+            <Button className="home-page__button-freela">Quero Freela</Button>
+            <Button className="home-page__button-curious">Sou Curioso</Button>
+          </motion.div>
+        </motion.div>
         <Image
-          className="home-page__image opacity-0 scale-0"
+          className="home-page__image col-start-4"
           src={srcImage}
           alt="Imagem"
-          width={300}
-          height={300}
+          width={470}
+          height={470}
         />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

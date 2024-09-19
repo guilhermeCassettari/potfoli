@@ -6,10 +6,20 @@ import { useState, useEffect } from 'react';
 const TypingEffect: React.FC<{
   delay?: number;
   text: string;
+  containerCss?: string;
+  textCss?: string;
   style?: React.CSSProperties;
-  className?: string;
+  cursor?: boolean;
   handleAnimationComplete?: () => void;
-}> = ({ text, style, className, handleAnimationComplete, delay }) => {
+}> = ({
+  text,
+  style,
+  textCss,
+  containerCss,
+  handleAnimationComplete,
+  cursor = false,
+  delay,
+}) => {
   const count = useMotionValue(0);
 
   const rounded = useTransform(count, (latest) => Math.round(latest));
@@ -38,24 +48,23 @@ const TypingEffect: React.FC<{
   }, []);
 
   return (
-    <>
-      <motion.span
-        className={`${className} ${animationCompleted ? 'animation-completed' : ''}text-4xl font-bold text-black`}
-        style={{ ...style }}
-      >
+    <div className={`${containerCss}`}>
+      <motion.span className={`${textCss}`} style={{ ...style }}>
         {displayText}
       </motion.span>
-      <motion.span
-        animate={{ opacity: 0 }}
-        className="text-white"
-        transition={{
-          repeat: Infinity,
-          duration: 0.5,
-        }}
-      >
-        |
-      </motion.span>
-    </>
+      {cursor && (
+        <motion.span
+          animate={{ opacity: 0 }}
+          className={`${textCss}`}
+          transition={{
+            repeat: Infinity,
+            duration: 0.5,
+          }}
+        >
+          {' |'}
+        </motion.span>
+      )}
+    </div>
   );
 };
 
